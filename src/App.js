@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+
+export default function App() {
+  const [cost, setCost] = useState(0);
+  const [personalTip, setPersonalTip] = useState(0);
+  const [friendTip, setFriendTip] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tip Calculator</h1>
+      <Bill cost={cost}></Bill>
+      <PersonalReview personalTip={personalTip}></PersonalReview>
+      <FriendReview friendTip={friendTip}></FriendReview>
     </div>
   );
 }
 
-export default App;
+function Bill({ cost, children }) {
+  return (
+    <div>
+      <label for="billCost" className="text">How much was the bill?</label>
+      <input id="billCost" type="text" placeholder={cost}></input>
+    </div>
+  );
+}
+
+function PersonalReview({ personalTip }) {
+  return (
+    <div>
+      <label for="personalReview" className="text">
+        How did your like the service?
+      </label>
+      <input
+        id="personalReview"
+        type="text"
+        placeholder={`${personalTip}%`}
+      ></input>
+    </div>
+  );
+}
+
+function FriendReview({ friendTip }) {
+  return (
+    <div>
+      <label for="friendReview" className="text">
+        How did your friend like the service?
+      </label>
+      <input
+        id="friendReview"
+        type="text"
+        placeholder={`${friendTip}%`}
+      ></input>
+    </div>
+  );
+}
