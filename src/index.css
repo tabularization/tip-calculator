@@ -1,9 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
 :root {
   font-size: 62.5%;
-  --text-color: red
+  --text-color: black;
+  font-family: "VT323", monospace;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+input, select {
+  font-family: "VT323", monospace;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+button {
+  font-family: "VT323", monospace;
+  font-size: 2rem;
+  border: none;
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-container {
+  justify-content: flex-start;
 }
 
 .text {
-  font-size: 1.5rem;
-  color: var(--text-color);
+  font-size: 2rem;
 }
+
+.outline {
+  border: 2px solid black; 
+  padding: 3rem;
+}
+

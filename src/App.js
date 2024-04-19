@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function App() {
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState("0");
   const [personalTip, setPersonalTip] = useState(0);
   const [friendTip, setFriendTip] = useState(0);
 
@@ -24,13 +24,25 @@ export default function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Tip Calculator</h1>
-      <Bill cost={cost} onSetCost={handleSetCost}/>
-      <PersonalReview personalTip={personalTip} onSetPersonalTip={handleSetPersonalTip}/>
-      <FriendReview friendTip={friendTip} onSetFriendTip={handleSetFriendTip}/>
-      <Results cost={cost} personalTip={personalTip} friendTip={friendTip}/>
-      <Button onReset={handleReset}>Reset!</Button>
+    <div className="container">
+      <div class="sub-container outline">
+        <h1 class="text">Tip Calculator</h1>
+        <Bill cost={cost} onSetCost={handleSetCost} />
+        <PersonalReview
+          personalTip={personalTip}
+          onSetPersonalTip={handleSetPersonalTip}
+        />
+        <FriendReview
+          friendTip={friendTip}
+          onSetFriendTip={handleSetFriendTip}
+        />
+        <Results
+          cost={cost}
+          personalTip={personalTip}
+          friendTip={friendTip}
+        />
+        <Button onReset={handleReset}>Reset!</Button>
+      </div>
     </div>
   );
 }
@@ -41,12 +53,17 @@ function Bill({ cost, onSetCost }) {
       <label for="billCost" className="text">
         How much was the bill?
       </label>
-      <input id="billCost" type="text" placeholder={cost} onChange={(e)=>onSetCost(e.target.value)}></input>
+      <input
+        id="billCost"
+        type="text"
+        value={cost}
+        onChange={(e) => onSetCost(e.target.value)}
+      ></input>
     </div>
   );
 }
 
-function PersonalReview({ personalTip, onSetPersonalTip}) {
+function PersonalReview({ personalTip, onSetPersonalTip }) {
   return (
     <div>
       <label for="personalReview" className="text">
@@ -55,8 +72,8 @@ function PersonalReview({ personalTip, onSetPersonalTip}) {
       <select
         id="personalReview"
         type="text"
-        placeholder={`${personalTip}%`}
-        onChange={(e)=>onSetPersonalTip(e.target.value)}
+        value={personalTip}
+        onChange={(e) => onSetPersonalTip(e.target.value)}
       >
         <option value="0">Dissastisfied (0%)</option>
         <option value="15" selected>
@@ -78,7 +95,7 @@ function FriendReview({ friendTip, onSetFriendTip }) {
       <select
         id="friendReview"
         type="text"
-        placeholder={`${friendTip}%`}
+        value={friendTip}
         onChange={(e) => onSetFriendTip(e.target.value)}
       >
         <option value="0" selected>
@@ -92,13 +109,16 @@ function FriendReview({ friendTip, onSetFriendTip }) {
   );
 }
 
-function Results({ cost, personalTip, friendTip}) {
-  const tipPercent = (parseFloat(personalTip) + parseFloat(friendTip)) / 2
+function Results({ cost, personalTip, friendTip }) {
+  const tipPercent =
+    (parseFloat(personalTip) + parseFloat(friendTip)) / 2;
   return (
     <div>
-      <h2>
-        Your total bill is ${cost * (1 + tipPercent / 100)}. You
-        tipped ${cost * (tipPercent / 100)} ({tipPercent}%).
+      <h2 className="text">
+        {cost !== "0"
+          ? `Your total bill is $${cost * (1 + tipPercent / 100)};`
+          : " "}{" "}
+        You tipped ${cost * (tipPercent / 100)} ({tipPercent}%).
       </h2>
     </div>
   );
@@ -107,7 +127,7 @@ function Results({ cost, personalTip, friendTip}) {
 function Button({ onReset, children }) {
   return (
     <>
-      <button onClick={onReset}>{children}</button>
+      <button onClick={() => onReset()}>{children}</button>
     </>
   );
 }
